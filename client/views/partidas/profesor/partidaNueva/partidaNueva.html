@@ -1,0 +1,37 @@
+<template name="partidaNueva">
+
+
+  <form id="formNewPartida" class="box2GL">
+    <div class="titlebox2">{{_"partida.CrearPartidaNuevaTitle"}}</div>
+    <div class="col2GL">
+      <div class="labelinput"></div>
+      <input type="text" id="txtNombrePartida" required class="input-text" placeholder="{{_"partida.nombre"}}">
+      {{> dropdown drop=dropEscenarios id="selectEscenario" }}
+      {{> dropdown drop=dropEncuestas id="selectEncuesta" }}
+
+      <div class="space3"></div>
+      <div class="buttonGL"><input type="submit" value="{{_"btn.crearPartida"}}"/></div>
+      <div class="space1"></div>
+      <a id="btnClear" href="/partidas" class="buttonGL-link">{{_"btn.cancelarNuevaPartida"}}</a>
+    </div>
+    <div class="col2GL">
+      <div class="labelinput">{{_"partida.stage"}} 1</div>
+      {{> dropdown drop=dropTimes id="selectDuracionFaseA"}}
+      <div class="space2"></div>
+      <div class="labelinput">{{_"partida.stage"}} 2</div>
+      {{> dropdown drop=dropTimes id="selectDuracionFaseB"}}
+      <div class="space2"></div>
+      <div class="labelinput">{{_"partida.stage"}} 3</div>
+      {{> dropdown drop=dropTimes2 id="selectDuracionFaseC"}}
+
+      <input type="hidden" id="selectTipo" value="s">
+      <input type="hidden" id="selectCantidad" value="12">
+
+    </div>
+  </form>
+
+  <div class="alert alert-danger {{alertasHidden}}" role="alert">
+    {{alerta}}
+  </div>
+
+</template>

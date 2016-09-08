@@ -1,0 +1,41 @@
+<template name="lobbyProfesorNav">
+  <div class="box3GL">
+    <div class="bluebox">
+      <div class="bluetitle">{{_"partida.idpartida"}}</div>
+      <div class="bluefalsebox">{{shortidPartida}}</div>
+      <div class="bluebutton"><button id="btnIniciarPartida">{{_"btn.iniciarPartida"}}</button></div>
+    </div>
+    <div class="row31GL">
+      <div class="groupsContainer">
+        {{#each grupo in grupos}}
+            {{>dropgroup grupo}}
+        {{/each}}
+      </div>
+      <div class="row31buttons">
+        {{>switch id="switchBloquearGrupos" label=bloquearlabel _id=_id}}
+        <div class="recomendacionGL2">{{{_"partida.recomendacion1"}}}</div>
+      </div>
+    </div>
+    <div class="row32GL">
+      <div class="titlesingrupo">{{{_"partida.singrupo"}}}</div>
+      <ul class="singrupolist">
+        {{#each jugador in singrupo}}
+            <li>{{jugador.text}}</li>
+        {{else}}
+            <li>{{_"partida.Ninguno"}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+    <!--div class="alert alert-danger {{alertasHidden}}" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      {{alerta}}
+    </div-->
+
+  <button id="btnForzarGrupos" class="btn btn-default">
+    {{_"btn.forzarGrupos"}}
+  </button>
+      
+
+</template>

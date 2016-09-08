@@ -1,0 +1,37 @@
+<template name="partidasNav">
+	<div class="titleHome">{{_"partida.labelCrearPartida"}}</div>
+
+	{{> dropdown dropPresets}}
+
+	{{> dropdown drop=dropPartidas id="listPartidas"}}
+	
+	<div class="space2"></div>
+
+	<div class="buttonGL"><button type="button" id="btnNewPartida">{{_"btn.newPartida"}}</button></div>
+
+	<div class="space1"></div>
+
+	<div class="recomendacionGL">{{{_"partida.newPartidaTexto"}}}</div>
+
+    {{#if hayPartidas}}
+	    <table class="table">
+	    <tr>
+	      <th>{{_ "lbl.nombrePartida"}}</th>
+	      <th></th>
+	    </tr>
+	    {{#each partida in partidas}}
+	    <tr>
+	      <td>{{partida.nombre}}</td>
+	      <td>
+	        {{#with partida}}
+	          <a href="{{pathFor route="lobby.show"}}">
+	            <button class="btn btn-primary">{{_ "btn.rejoin"}}</button>
+	          </a>
+	        {{/with}}
+	      </td>
+	    </tr>
+	    {{/each}}
+	  	</table>
+  	{{/if}}
+ 
+</template>

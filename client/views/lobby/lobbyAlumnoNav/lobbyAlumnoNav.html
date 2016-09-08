@@ -1,0 +1,37 @@
+<template name="lobbyAlumnoNav">
+  <div class="box3GL">
+    <form class="bluebox" id="formNewGroup">
+      <div class="bluetitle">{{_"partida.crearNuevoGrupoLabel"}}</div>
+      <input class="bluetruebox" type="text" id="txtNombreGrupo" required>
+      <div class="bluebutton"><button id="btnSubmitNuevoGrupo">{{_"btn.crearNuevoGrupo"}}</button></div>
+    </form>
+    <div class="row31GL">
+      <div class="groupsContainer">
+        {{#each grupo in grupos}}
+            {{>dropgroup drop=grupo me=myid}}
+        {{/each}}
+      </div>
+      <div class="row31buttons">
+        {{>switch label=bloquearlabel disabled=1 on=isGroupsLocked }}
+        <div class="recomendacionGL2">{{{_"partida.recomendacion1"}}}</div>
+      </div>
+    </div>
+    <div class="row32GL">
+      <div class="titlesingrupo">{{{_"partida.singrupo"}}}</div>
+      <ul class="singrupolist">
+        {{#each jugador in singrupo}}
+            <li>{{jugador.text}}</li>
+        {{else}}
+            <li>{{_"partida.Ninguno"}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+
+    <!--div class="alert alert-danger {{alertasHidden}}" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      {{alerta}}
+    </div-->
+
+</template>

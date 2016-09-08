@@ -1,0 +1,34 @@
+<template name="unirPartida">
+	<div class="titleHome">{{_"partida.unirselabel"}}</div>
+    <input id="txtCodigo" type="text" class="input-text" placeholder="{{_"partida.unirseidPlaceholder"}}"/>
+	{{> dropdown drop=dropPartidas id="listPartidas"}}
+	<div class="space2"></div>
+	<div class="buttonGL"><button type="button" id="btnJoin">{{_"btn.unir"}}</button></div>
+	<div class="space1"></div>
+	<a href="#" class="buttonGL-link">{{_"btn.cancelar"}}</a>
+
+    {{#if hayPartidas}}
+	    <table class="table">
+	    <tr>
+	      <th>{{_ "lbl.nombrePartida"}}</th>
+	      <th></th>
+	    </tr>
+	    {{#each partida in partidas}}
+	    <tr>
+	      <td>{{partida.nombre}}</td>
+	      <td>
+	        {{#with partida}}
+	          <a href="{{pathFor route="lobby.show"}}">
+	            <button class="btn btn-primary">{{_ "btn.rejoin"}}</button>
+	          </a>
+	        {{/with}}
+	      </td>
+	    </tr>
+	    {{/each}}
+	  	</table>
+  	{{/if}}
+
+
+    {{alerta}}
+
+</template>
