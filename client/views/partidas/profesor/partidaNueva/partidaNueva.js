@@ -1,5 +1,5 @@
 /*Temporalmente seran datos fijoss*/
-var duraciones = [2, 5, 10, 15, 20, 25, 30];
+var duraciones = [10, 20, 30, 60, 120, 180];
 var duraciones2 = [1, 2, 5, 10];
 var tipos = ['trimestre', 'semestre','anual'];
 var cantidadesPeriodos = [3,6,9,12];
@@ -22,7 +22,7 @@ Template['partidaNueva'].helpers({
     return Template.instance().alerta.get();
   },
   escenarios: function() {
-    return Escenarios.find();
+    return []//Escenarios.find();
   },
   encuestas: function() {
     return Encuestas.find();
@@ -136,13 +136,7 @@ Template['partidaNueva'].events({
     var partida = {
       idProfesor: Meteor.userId(),
       nombrePartida: $('#txtNombrePartida').val(),
-      idEscenario: $('#selectEscenario').data().value,
-      idEncuesta: $('#selectEncuesta').data().value,
-      duracionFaseA: parseInt($('#selectDuracionFaseA').data().value),
-      duracionFaseB: parseInt($('#selectDuracionFaseB').data().value),
-      duracionFaseC: parseInt($('#selectDuracionFaseC').data().value),
-      tipoPeriodo: $('#selectTipo').val(),
-      cantidadPeriodos: parseInt($('#selectCantidad').val())
+      duracion: parseInt($('#selectDuracion').data().value)
     }
 
     if(partida.duracionFaseC == -1){
