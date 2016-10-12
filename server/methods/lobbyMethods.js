@@ -198,6 +198,8 @@ Meteor.methods({
       }
     }
 
+
+
     //Crea la respuesta B
     var faseB = FasesB.findOne({
       idPartida: _params.idPartida

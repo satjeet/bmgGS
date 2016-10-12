@@ -35,7 +35,7 @@
         "volver": "Back"
     },
     "header": {
-        "gamename1": "SuperEjemploBros",
+        "gamename1": "The Brand Management ",
         "gamename2": "Game"
     },
     "lbl": {
@@ -77,7 +77,7 @@
         "unirselabel": "Join Game"
     },
     "presentacion": {
-        "bienvenido": "Welcome to the BSC Game",
+        "bienvenido": "Welcome to the Brand Management Game",
         "desiciones": "In this game you will make decisions for NeXstore",
         "mision": "Your mission is to increase profitability according to the board's requests",
         "reset": "Reset game data"
