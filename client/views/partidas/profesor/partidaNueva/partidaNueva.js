@@ -63,22 +63,14 @@ Template['partidaNueva'].helpers({
         default:0
       }
     };  },
-  // faseA:function(){
-  //   return Template.instance().faseA.get();
-  // },
-  // faseB:function(){
-  //   return Template.instance().faseB.get();
-  // },
-  // faseC:function(){
-  //   return Template.instance().faseC.get();
-  // },
-  duracionesFaseA:function(){
-    return duraciones;
+ 
+  duracionesFase0:function(){
+    return duraciones2;
   },
-
+ // aqui se alimenta el drop select de la duracion de la partida
   dropTimes:function() {
     var res = [{value:-1, text:TAPi18n.__("partida.duracion")}];//[{value:1, text:"test"}];
-    _.each(duraciones, function(time){
+    _.each(duraciones2, function(time){
       console.log(time)
       if(time){
         res.push({value:time, text:time+" "+TAPi18n.__("partida.minutos")});
@@ -152,13 +144,5 @@ Template['partidaNueva'].events({
       }
     });
   },
-  // 'click #togFaseA':function(event){
-  //   Template.instance().faseA.set($('#togFaseA').is(':checked'));
-  // },
-  // 'click #togFaseB':function(event){
-  //   Template.instance().faseB.set($('#togFaseB').is(':checked'));
-  // },
-  // 'click #togFaseC':function(event){
-  //   Template.instance().faseC.set($('#togFaseC').is(':checked'));
-  // }
+ 
 });

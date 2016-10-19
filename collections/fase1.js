@@ -1,6 +1,6 @@
-FasesA = new Mongo.Collection('FasesA');
+FasesB = new Mongo.Collection('FasesB');
 
-FasesA.attachSchema(
+FasesB.attachSchema(
   new SimpleSchema({
     idPartida: {
       type: String
@@ -23,7 +23,7 @@ FasesA.attachSchema(
 );
 
 if (Meteor.isServer) {
-  FasesA.allow({
+  FasesB.allow({
     insert: function() {
       return false;
     },
@@ -35,3 +35,4 @@ if (Meteor.isServer) {
     }
   });
 }
+

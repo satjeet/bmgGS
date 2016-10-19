@@ -88,9 +88,8 @@ Meteor.methods({
         idJuego: Juegos.findOne({
           nombre: "TSJ"
         })._id,
-        //idEscenario: _partidaParams.idEscenario,
-        /*Podria guardarse la id de la encuesta
-        idEncuesta: _partidaParams.idEncuesta*/
+        
+
       };
       var idPartida = Partidas.insert(partida);
       //Se crea el grupo sin grupos
@@ -101,48 +100,7 @@ Meteor.methods({
       };
       Grupos.insert(grupoSinGrupos);
 
-      //Se crean las fases pertinentes
-      // var escenario = Escenarios.findOne({
-      //   _id: _partidaParams.idEscenario
-      // });
-      // if (_partidaParams.duracionFaseA != -1) {
-      //   //Crea la Fase A
-      //   faseA = {};
-      //   faseA.duracion = _partidaParams.duracionFaseA;
-      //   faseA.idConfigFaseA = escenario.idConfigFaseA;
-      //   faseA.idPartida = idPartida;
-      //   FasesA.insert(faseA);
-      // }
-      // if (_partidaParams.duracionFaseB != -1) {
-      //   //Crea la Fase B
-      //   faseB = {};
-      //   faseB.duracion = _partidaParams.duracionFaseB;
-      //   faseB.idConfigFaseB = escenario.idConfigFaseB;
-      //   faseB.idPartida = idPartida;
-      //   FasesB.insert(faseB);
-      // }
-      // if (_partidaParams.duracionFaseC != -1) {
-      //   console.log("creando la faseC")
-      //   //Crea la Fase C
-      //   faseC = {};
-      //   faseC.duracion = _partidaParams.duracionFaseC;
-      //   faseC.periodo = 0;
-      //   faseC.cantPeriodos = _partidaParams.cantidadPeriodos;
-      //   console.log(escenario)
-      //   faseC.idConfigFaseC = escenario.idConfigFaseC;
-      //   faseC.idPartida = idPartida;
-      //   faseC.lastStepTime = new Date();
-        
-      //   var fechaInicio = new Date();
-      //   var fechaFin = new Date();
-      //   fechaFin.setMinutes(fechaInicio.getMinutes() + faseC.duracion);
-      //   faseC.periodos = [{
-      //     numero: 0,
-      //     fechaInicio: fechaInicio,
-      //     fechaFin: fechaFin
-      //   }];
-      //   FasesC.insert(faseC);
-      // }
+ 
       return idPartida;
     } else {
       throw new Meteor.Error(500, "Su session ha caducado");
@@ -186,76 +144,16 @@ Meteor.methods({
     });
     //Borra los grupos vacios, desactivado para pruebas rapidas,
     //Grupos.remove({idPartida: _params.idPartida, miembros: []})
-
+    console.log("paso el checkd e inicio partida, osea tengo los params");
     //Crea la respuesta A
-    var faseA = FasesA.findOne({
+    var fase0 = Fases0.findOne({
       idPartida: _params.idPartida
     });
-    if (faseA) {
-      if (faseA != null) {
-        var respuestaFaseA = inicializaRespuestaFaseA(faseA._id)
-        respuestaFaseA.puntaje = -1;
-      }
-    }
-
-
-
-    //Crea la respuesta B
-    var faseB = FasesB.findOne({
-      idPartida: _params.idPartida
-    });
-    if (faseB) {
-      var respuestaFaseB = {};
-      respuestaFaseB.idFaseB = faseB._id;
-      respuestaFaseB.puntaje = -1;
-      respuestaFaseB.objetivos = [];
-      var objetivos = ConfigsFaseB.findOne({
-        _id: faseB.idConfigFaseB
-      }).objetivos;
-      for (var o in objetivos) {
-        respuestaFaseB.objetivos.push(/*objetivos[o] = */{
-          idObjetivo: objetivos[o].idObjetivo,
-          indicadores: [],
-          id: objetivos[o].idObjetivo
-        });
-      }
-    }
-
-    //Crea la respuesta C
-    var faseC = FasesC.findOne({
-      idPartida: _params.idPartida
-    });
-    if (faseC != null) {
-      var respuestaFaseC = {};
-      respuestaFaseC.idFaseC = faseC._id;
-      respuestaFaseC.periodos = [];
-      for(var i = 0;i<faseC.cantPeriodos;i++){
-        respuestaFaseC.periodos.push({idIniciativas: []});
-      }
-
-    }
-
-    //Inserta todas las respuestas de cada fase
-    //y la respuesta BSC para cada grupo
-    for (var g in _params.idGrupos) {
-      var respuestaBSC = {};
-      respuestaBSC.idGrupo = _params.idGrupos[g];
-      //Asigna las respuestas
-      if (faseA != null) {
-        respuestaBSC.idRespuestaFaseA = RespuestasFaseA.insert(respuestaFaseA);
-      }
-      if (faseB != null) {
-        console.log("insert respuestaFaseB g"+g)
-        console.log(respuestaFaseB)
-        respuestaBSC.idRespuestaFaseB = RespuestasFaseB.insert(respuestaFaseB);
-        console.log(respuestaBSC.idRespuestaFaseB)
-      }
-      if (faseC != null) {
-        respuestaBSC.idRespuestaFaseC = RespuestasFaseC.insert(respuestaFaseC);
-      }
-      RespuestasBSC.insert(respuestaBSC);
-    }
+    console.log(" un cambio")
+  
     nextFase(_params.idPartida);
+    console.log(" nexfase cambio")
+
     return '/lobby/' + _params.idPartida;
   },
   terminarJuego: function(_idPartida) {
@@ -267,6 +165,135 @@ Meteor.methods({
         estadoActual: "Finalizada"
       }
     });
+  },
+   'CrearCanales': function(idPartida){
+        //var currentUserId = Meteor.user._id;     Meteor.userId()
+        if(this.userId){
+          //Vector6:{1,1,1,0,0,0}
+          var canal = [];
+          canal=[
+                  {nombreCanal:"TV ad",opcion:1,costo:3,eficiencia:0.8,vector6:[1,1,1,0,0,0]},
+                  {nombreCanal:"Magazine ad",opcion:2,costo:2,eficiencia:0.7,vector6:[1,1,1,0,0,0]},
+                  {nombreCanal:"POS ad",opcion:3,costo:2,eficiencia:0.6,vector6:[0,1,1,1,1,0]},
+                  {nombreCanal:"Event",opcion:4,costo:4,eficiencia:0.8,vector6:[0,1,1,1,1,0]},
+                  {nombreCanal:"Discount",opcion:5,costo:1,eficiencia:0.5,vector6:[0,0,1,1,1,0]},
+                  {nombreCanal:"Sampling",opcion:6,costo:3,eficiencia:0.6,vector6:[0,0,1,1,1,0]},
+                  {nombreCanal:"Collectables",opcion:7,costo:3,eficiencia:0.7,vector6:[0,0,0,1,1,0]},
+                  {nombreCanal:"Special series",opcion:8,costo:2,eficiencia:0.6,vector6:[0,0,0,0,1,1]},
+                  {nombreCanal:"CRM",opcion:9,costo:3,eficiencia:0.7,vector6:[0,0,0,0,1,1]},
+                            
+            ];
+            var idPartida= idPartida;
+            console.log("blabla");
+            //var respuesta=Canales.insert({idPartida:idPartida,canal:canal});
+           // console.log("respuesta : "+respuesta);
+
+            if(Canales.findOne({
+                                 'idPartida': idPartida, })!= undefined) 
+            {
+              }else{
+                //el canal aun no exite, asi que lo creo
+            var respuesta=Canales.insert({idPartida:idPartida,canal:canal});
+            console.log("respuesta : "+respuesta);
+                
+            }
+
+
+
+
+
+        }else console.log("no hay un user activo");
+
+  },
+   'CrearSegmentos': function(idPartida,userId){
+        //idGrupo
+
+        //let idGrupo=Grupos.findOne(idPartida:idPartida,);
+          let idGrupo="";
+         idGrupo = Grupos.findOne({
+                                 idPartida: idPartida,
+                                 miembros: {
+                                            $in: [userId]
+                                           }
+          })._id;
+        // idGrupo ="algo"
+         console.log("la ide del grupo es"+idGrupo);
+        //var currentUserId = Meteor.user._id;     Meteor.userId()
+        console.log("aqui va bien en crear segments");
+        if(this.userId){
+          //Vector6:{1,1,1,0,0,0}
+          var segmentos=[];
+          segmentos=[
+            {nombreSegmento:"highIncome",opcion:1,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:40,margin:20,value:800},
+            {nombreSegmento:"innovators",opcion:2,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:20,margin:16,value:320},
+            {nombreSegmento:"familyFirst",opcion:3,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:100,margin:8,value:800},
+            {nombreSegmento:"statusSeekers",opcion:4,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:20,margin:32,value:640},
+            {nombreSegmento:"adventurers",opcion:5,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:40,margin:16,value:640},
+            ];
+
+            //var idGrupo= idGrupo;
+            console.log("blabla Segmentos");
+            if(Segmentos.findOne({
+                                 'idPartida': idPartida,
+                                 'idGrupo': idGrupo          })!= undefined) 
+            {
+              console.log("encontre el segmento al que pertenesco")}else{
+                //el segmento aun no exite, asi que lo creo
+            var respuesta=Segmentos.insert({'idPartida':idPartida,'idGrupo':idGrupo,
+              'dineroInicial':250,'dineroInvertido':0,'ganancias':0,'resultado':0,
+              'segmentos':segmentos});
+            console.log("respuesta id del segmento : "+respuesta);
+
+              }
+
+           // var respuesta=Segmentos.insert({idGrupo:idGrupo,segmentos:segmentos});
+
+
+
+
+
+        }else console.log("no hay un user activo");
+/*
+  },
+  'CrearResultados': function(idPartida,userId){
+        //idGrupo
+
+        //let idGrupo=Grupos.findOne(idPartida:idPartida,);
+          let idGrupo="";
+         idGrupo = Grupos.findOne({
+                                 idPartida: idPartida,
+                                 miembros: {
+                                            $in: [userId]
+                                           }
+          })._id;
+        // idGrupo ="algo"
+         console.log("la ide del grupo es"+idGrupo);
+        //var currentUserId = Meteor.user._id;     Meteor.userId()
+        console.log("aqui va bien en crear segments");
+        if(this.userId){
+          //Vector6:{1,1,1,0,0,0}
+          
+            //var idGrupo= idGrupo;
+            console.log("blabla Segmentos");
+            if(Resultados.findOne({
+                                 'idPartida': idPartida,
+                                 'idGrupo': idGrupo          })!= undefined) 
+            {
+              console.log("encontre el resultado al que pertenesco")}else{
+                //el segmento aun no exite, asi que lo creo
+            var respuesta=Segmentos.insert({'idPartida':idPartida,'idGrupo':idGrupo,'segmentos':segmentos});
+            console.log("respuesta id del segmento : "+respuesta);
+
+              }
+
+           // var respuesta=Segmentos.insert({idGrupo:idGrupo,segmentos:segmentos});
+
+
+
+
+
+        }else console.log("no hay un user activo");
+*/
   },
   siguienteFase: function(_idPartida) {
     check(_idPartida, String);
@@ -445,19 +472,19 @@ function nextFase(_idPartida) {
   var partida = Partidas.findOne({
     _id: _idPartida
   });
+  console.log("NEXT FASE", _idPartida)
   var nuevoEstado = "";
   var fases = {};
   fases.Lobby = {};
-  fases.FaseA = FasesA.findOne({
+  fases.FaseA = {};
+  fases.FaseB = {};
+  fases.FaseC = {};
+/*fases.Fase0 = Fases0.findOne({
     idPartida: _idPartida
   });
-  fases.FaseB = FasesB.findOne({
-    idPartida: _idPartida
-  });
-  fases.FaseC = FasesC.findOne({
-    idPartida: _idPartida
-  });
-  // fases.final = {};
+  */
+ 
+  console.log("llega aqui");
   var estado = partida.estadoActual;
   var faseNameAnterior = '';
   lbl_fases: {
@@ -471,7 +498,10 @@ function nextFase(_idPartida) {
       }
     }
   }
-  // console.log('lobbymethods.nextFase: nuevoEstado' + nuevoEstado);
+  console.log("que tiene partida",partida);
+
+  console.log("llega aca",fases);
+
   Partidas.update({
     _id: _idPartida
   }, {

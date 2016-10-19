@@ -81,10 +81,61 @@ Router.route('/lobby/:_id',{
     }
   },
   subscriptions: function(){
-    this.subscribe('users');
-    this.subscribe('AllGrupos');
+   this.subscribe('users');
+   this.subscribe('AllGrupos');
   },
   data: function() {
     return Partidas.findOne({_id:{$regex:'^'+this.params._id}});
   }
+});
+
+
+Router.route('/fase0/:_id',{
+  name: 'faseA',
+    waitOn: function(){
+    
+    
+    if(Roles.getRolesForUser(Meteor.userId())[0]=="alumno"){
+      return [this.subscribe('PartidaActual', this.params._id),
+              //this.subscribe('AllGrupos')
+              ];
+    }
+    if(Roles.getRolesForUser(Meteor.userId())[0]=="profesor"){
+      console.log("suscribiendo al profesor en fase 0");
+      return [this.subscribe('PartidaActual', this.params._id),
+              this.subscribe('Grupos', this.params._id)
+              ];
+    }
+    
+  },
+ 
+   action: function() {
+    if(this.ready()){
+      if (GS_usuarios.userLoggedIn(this)) {
+        console.log("rutas partida");
+        var partida = Partidas.findOne({_id:{$regex:'^'+this.params._id}});
+        if(partida != null){
+          if(routing.isFaseA(partida.estadoActual)){
+            console.log("deberia entrar a faseA");
+            this.render('faseA');
+          }else{
+            routing.redireccionarPartida(partida);
+          }
+        }else{
+          console.log("vamos a partidas");
+          Router.go('/');
+        }
+      }
+    }
+  },
+   subscriptions: function(){
+   this.subscribe('users');
+  // this.subscribe('AllGrupos');
+  },
+
+   data: function() {
+      return Partidas.findOne({_id:{$regex:'^'+this.params._id}});
+    },
+    
+
 });

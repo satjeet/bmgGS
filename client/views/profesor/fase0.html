@@ -1,0 +1,97 @@
+
+<template name="pantallaFase0">
+	<div class="container">
+
+		<div class="row">
+			<h1> {{_ "Fase0Profesor.TXTtitulo"}}</h1>
+			<h3> {{_ "Fase0Profesor.TXTturno"}} : {{partidaTurno}}</h3>
+			<!--  button class="crear">Comenzar partida </button>-->
+
+			
+				
+		</div>
+		<div class="row">
+
+			<button class="EmpezarTurno">{{_ "Fase0Profesor.BTNempezarFase1"}} </button>
+		 <!-- 	<button class="pasarFase2"> {{_ "Fase0Profesor.BTNpasarFase2"}}  </button>    -->
+
+		</div>
+
+
+		<div class="row">
+
+			<div class="col-md-4 col-xs-4">
+			<h3> </h3>
+			</div>
+
+			<div class="col-md-4 col-xs-4">
+			</div>
+
+			<div class="col-md-4 col-xs-4">
+			<h3> </h3>
+			</div>
+
+		</div>  <!-- fin de row -->
+
+		<div class="row ">
+			<table class="table table-striped" cellpadding="5" cellspacing="2">
+				<tr ><!-- Fila -->
+					<td> <h3>{{_ "Fase0Profesor.TXTsegmentos"}}</h3></td>
+					<td> <h3>{{_ "Fase0Profesor.TXTfidelidadDesconocido"}}</h3></td>
+					<td> <h3>{{_ "Fase0Profesor.TXTfidelidadConocido"}}</h3></td>
+					<td> <h3>{{_ "Fase0Profesor.TXTfidelidadConsiderando"}}</h3></td>
+					<td><h3>{{_ "Fase0Profesor.TXTfidelidadProbando"}}</h3></td>
+					<td> <h3>{{_ "Fase0Profesor.TXTfidelidadRepertorio"}}</h3></td>
+					<td> <h3>{{_ "Fase0Profesor.TXTfidelidadRegular"}}</h3></td>
+					<td> <h3>{{_ "Fase0Profesor.TXTfidelidadLeal"}}</h3></td>
+				</tr>
+
+				<tr class="active grande">
+					<td> <h3>{{_ "Fase0Profesor.TXTsegmentosIngresoAlto"}} </h3></td>
+					<td>
+					{{#each grupo in grupos }}
+							{{ grupo.nombre }}
+					{{/each }}
+					
+					</td>
+				</tr>
+				
+
+				
+
+			</table><!-- fin de tabla -->
+
+		</div><!-- fin de row -->
+
+
+		<div><!-- alumnos pasan a fase de espera y profesor pasa a fase 2 -->
+
+		</div><!-- fin de row -->
+
+		<div class="row">
+			
+		<button class="EliminarPartida">DANDGER: eliminar partida</button>
+			
+			
+				
+		</div>
+			
+		
+		
+	</div><!-- fin de container -->
+
+
+</template>
+	
+
+
+
+
+
+
+
+
+
+
+
+

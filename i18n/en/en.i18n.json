@@ -96,5 +96,122 @@
         "mainHeader": "Gamelab",
         "tituloEscenarioEdicion": "Editing scenario",
         "tituloEscenarioNuevo": "Creating new scenario"
-    }
+    },
+    "PreparandoPartida": {
+        "crearPartida": "Create a new Game",
+        "PHcrearPartida": "Input the name of the Game",
+        "BTNcrearPartida": "Create",
+        "unirsePartida": "Join a Game",
+        "PHunirsePartida": "Input the name of the Game",
+        "BTNunirsePartida": "Join"
+    },
+      "LoadingProfesor": {
+        "TXTesperandoAlumnos": "Waiting for the Students ...",
+        "BTNcrearPartida": "All Ready to Start",
+        "TXTlistaGrupos":"List of Groups"
+        
+      },
+      "loading": {
+        "TXTesperandoProfesor": "Waiting for the Profesor..."
+        
+        
+      },
+      "loadingProfesorFase0": {
+        "TXTloadingfase0a1": "Waiting for the Students for begin Phase 2 ...",
+        "BTNpasarFase2": "Go to Phase 2"
+        
+      },
+      "Fase0Profesor": {
+        "BTNempezarFase1": "Begin Phase 1",
+        "BTNpasarFase2": "Go to Phase 2",
+        "TXTturno": "Turn",
+        "TXTtitulo": "Phase 0 Professor",
+        "TXTsegmentos": "Segments",
+        "TXTfidelidadDesconocido": "Unawareness",
+        "TXTfidelidadConocido": "Awareness",
+        "TXTfidelidadConsiderando": "Consideration",
+        "TXTfidelidadProbando": "Trial",
+        "TXTfidelidadRepertorio": "Repertoire",
+        "TXTfidelidadRegular": "Regular",
+        "TXTfidelidadLeal": "Loyal",
+        "TXTsegmentosIngresoAlto": "High Income",
+        "TXTsegmentosInnovadores": "Innovators",
+        "TXTsegmentosPriorizaFamilia": "Family First",
+        "TXTsegmentosBuscadoresStatus": "Status Seekers",
+        "TXTsegmentosAventureros": "Adventurers"
+
+
+     },
+      "Fase2Profesor": {
+        "BTNpasarFase3": "Go to Phase 3",
+        "TXTtitulo": "Phase 2 Professor",
+        "TXTequipos": "Teams",
+       "TXTsegmentosIngresoAlto": "High Income",
+        "TXTsegmentosInnovadores": "Innovators",
+        "TXTsegmentosPriorizaFamilia": "Family First",
+        "TXTsegmentosBuscadoresStatus": "Status Seekers",
+        "TXTsegmentosAventureros": "Adventurers"
+
+
+      },
+      "Fase3LoadingProfesor": {
+        "TXTesperandoAlumnos": "Waiting for the Students ...",
+        "BTNfinTurno": "All Ready to end the turn"
+        
+     },
+      "Grupos": {
+        "TXTcrearGrupo": "Create a Group",
+        "PHcrearGrupo": "Input your group's name",
+        "BTNcrearGrupo": "Create",
+        "TXTlistaGrupos": "List of Groups"
+
+      },
+      "Fase1Alumno": {
+        "TXTtitulo": "Phase 1 Student",
+        "TXTdineroInicial": "Initial Money : ",
+        "TXTsegmentos": "Segments",
+        "TXTfidelidadActual": "Current fidelity",
+        "TXTpublicidadSeleccion": "Advertising to apply",
+        "TXTfidelidadFutura": "Future fidelity ",
+        "TXTpublicidadCosto": "Advertising cost",
+        "TXTsegmentosIngresoAlto": "High Income",
+        "TXTsegmentosInnovadores": "Innovators",
+        "TXTsegmentosPriorizaFamilia": "Family First",
+        "TXTsegmentosBuscadoresStatus": "Status Seekers",
+        "TXTsegmentosAventureros": "Adventurers",
+        "TXTdineroInvertido": "Invested money: ",
+        "TXTdineroRestante": "Remaining money: ",
+        "TXTenviarInversion": "send investment:",
+        "TXTprobabilidadExito": "with a probability of success of"
+
+       },
+      "DBcanales": {
+        "TXTfidelidadDesconocido": "Unawareness",
+        "TXTfidelidadConocido": "Awareness",
+        "TXTfidelidadConsiderando": "Consideration",
+        "TXTfidelidadProbando": "Trial",
+        "TXTfidelidadRepertorio": "Repertoire",
+        "TXTfidelidadRegular": "Regular",
+        "TXTfidelidadLeal": "Loyal"
+      },
+      "Fase3Alumno": {
+        "TXTtitulo": "Phase 3",
+        "TXTsegmentos": "Segments",
+        "TXTfidelidad": "Fidelity",
+        "TXTganancias": "Profit",
+        "TXTfidelidadDesconocido": "Unawareness",
+        "TXTfidelidadConocido": "Awareness",
+        "TXTfidelidadConsiderando": "Consideration",
+        "TXTfidelidadProbando": "Trial",
+        "TXTfidelidadRepertorio": "Repertoire",
+        "TXTfidelidadRegular": "Regular",
+        "TXTfidelidadLeal": "Loyal",
+        "TXTsegmentosIngresoAlto": "High Income",
+        "TXTsegmentosInnovadores": "Innovators",
+        "TXTsegmentosPriorizaFamilia": "Family First",
+        "TXTsegmentosBuscadoresStatus": "Status Seekers",
+        "TXTsegmentosAventureros": "Adventurers"
+
+
+     }
 }
