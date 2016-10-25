@@ -11,6 +11,11 @@ Meteor.publish('losCanales',function(){
   return Canales.find();
 });
 
+Meteor.publish("PartidaDataActual", function(_idPartida){
+  check(_idPartida, String);
+  return PartidaData.find({idPartida:{$regex:'^'+_idPartida}});
+});
+
 
 Meteor.publish('misCanalesProfesor',function(){
   var userId =this.userId;
@@ -91,52 +96,40 @@ Meteor.publish('misGruposProfesor',function(){
   //return this.ready();
 });
 
-Meteor.publish('miSegmento',function(){
+Meteor.publish('miSegmento',function(_idPartida){
+   check(_idPartida, String);
+
   var userId =this.userId;
   //console.log("entre a mi segmento"); 
   //console.log("id de la partida desde mi segmento: ",htis.data);
 
   //var idpartida=Session.get('idpartida');
-   var grupos = Grupos.find({
-          //idPartida: idPartida,
+   var grupos = Grupos.findOne({
+          idPartida: _idPartida,
           miembros: {
             $in: [userId]
           }
       });
-  console.log("tengo los grupos donde esta el usuario en mi poder");
+  
 
+  console.log("tengo los grupos donde esta el usuario en mi poder");
+/*
    var idGrupo=[];
 	grupos.forEach(function(grupo){
-		//console.log("el id de la partida del grupo es "+ Partidas.findOne({"_id":grupo.idPartida})._id )
 		var mipartida=Partidas.findOne({"_id":grupo.idPartida});
-		//console.log("mi partida esta activa o no :"+mipartida.inProgress);
 
 		if(mipartida.inProgress==true){
 			console.log("entre al each del grupo en misegmento")
 			console.log("antes del grupo id"+ grupo._id);
 			idGrupo.push(grupo._id);	
 		}
-		//idGrupos.push(grupo._id);	
-		//console.log("probando algo",grupo);
 	});
-
-
-   //console.log("user id en mi grupo: " , grupo);     // muestra los objeto, no lo trata de transformar en string
-   
-   /*var segmento = Segmentos.find({
-          idGrupo: grupos._id
-      });
-   */
-//console.log("user id en mi segmento 2: ", segmento);
-
-  //if(segmento){
   	console.log("id del grupo en partida activa ",idGrupo);
 	var segmento = Segmentos.find({idGrupo: {$in: idGrupo}});
-
+*/
+var segmento= Segmentos.find({idPartida:_idPartida,idGrupo:grupos._id});
     return segmento;
 
-  //}
-  //return this.ready();
 });
 
 var toType = function(obj) {
@@ -175,4 +168,7 @@ Meteor.publish('misSegmentosProfesor',function(){
   //return this.ready();
 });
 
-
+Meteor.publish("misCanalesPartidas", function(_idPartida){
+  check(_idPartida, String);
+  return Canales.find({idPartida:{$regex:'^'+_idPartida}});
+});

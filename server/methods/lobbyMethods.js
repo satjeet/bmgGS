@@ -100,6 +100,27 @@ Meteor.methods({
       };
       Grupos.insert(grupoSinGrupos);
 
+// ingresar el id de partidas a PartidaData
+      var asd = PartidaData.insert({
+        idPartida:idPartida,
+        duracion:10,
+        turno:1,
+      });
+
+      var fechaInicio = new Date();
+      var fechaFin = new Date();
+
+
+      PartidaData.update({
+        idPartida: idPartida
+      }, {
+         $set: {
+            fechaInicio: fechaInicio,
+            fechaFin: fechaFin
+          
+        }
+      })
+
  
       return idPartida;
     } else {

@@ -1,0 +1,325 @@
+<template name="pantallaFase1">
+
+
+	<div class="container">
+
+		<!-- 
+			 we have 1 row that contains 2 columns
+		     one for the thumbnails and one for the 
+		     main reader view
+		-->
+
+		<div class="row">
+		
+
+		{{>cashfase}}
+
+
+		</div>  <!-- fin de row -->
+
+
+
+		<div class="row">
+			<div class="tabla jumbotron">
+
+				<div class="row">
+					
+					<div class="col-md-2 col-xs-2">
+					<h2> {{_ "Fase1Alumno.TXTsegmentos"}}  </h2>
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<h2> {{_ "Fase1Alumno.TXTfidelidadActual"}} </h2>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<h2> {{_ "Fase1Alumno.TXTpublicidadSeleccion"}} </h2>
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<h2> {{_ "Fase1Alumno.TXTfidelidadFutura"}}</h2>
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<h2> {{_ "Fase1Alumno.TXTpublicidadCosto"}}</h2>
+					</div>
+		
+				</div>  <!-- fin de row -->
+
+
+				<div class="row">
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{_ "Fase1Alumno.TXTsegmentosIngresoAlto"}}</p>
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoActual 0}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+
+					{{>selectHighIncome}}
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoFutura 0}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{valueDineroInvertido 0}} </p> <!-- El costo de la opcion de publicidad en High Income-->
+					</div>
+					
+				</div><!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{_ "Fase1Alumno.TXTsegmentosInnovadores"}}</p>
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoActual 1}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					{{>selectInnovators}}
+
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoFutura 1}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{valueDineroInvertido 1}}</p>
+					</div>
+					
+				</div><!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{_ "Fase1Alumno.TXTsegmentosPriorizaFamilia"}}</p>
+					</div>
+					
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoActual 2}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					{{>selectFamilyFirst}}
+
+					
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoFutura 2}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{valueDineroInvertido 2}}</p>
+					</div>
+					
+				</div><!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{_ "Fase1Alumno.TXTsegmentosBuscadoresStatus"}}</p>
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoActual 3}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					{{>selectStatusSeekers}}
+
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoFutura 3}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p>{{valueDineroInvertido 3}}</p>
+					</div>
+					
+				</div><!-- fin de row -->
+
+
+				<div class="row">
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{_ "Fase1Alumno.TXTsegmentosAventureros"}}</p>
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoActual 4}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					{{>selectAdventurers}}
+
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{fidelidadSegmentoFutura 4}} </p> <!-- La fase actual-->
+					</div>
+
+					<div class="col-md-2 col-xs-2">
+					<p> {{valueDineroInvertido 4}}</p>
+					</div>
+					
+				</div><!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p> </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<h3> {{_ "Fase1Alumno.TXTdineroInvertido"}} {{valueDineroInvertidoTotal 4}}   </h3>
+					</div>
+
+				</div>
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					</div>
+					<!-- //////////////  Dinero Restante                   ////////////
+					<div class="col-md-4 col-xs-4">
+					<p> {{_ "Fase1Alumno.TXTdineroRestante"}} {{dineroRestante}} </p>
+					</div>
+
+					-->
+
+				</div>  <!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p class="respuestaBTNinversion">{{ advertenciaSinFondos}} </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					</div>
+					<!-- //////////////  Dinero Restante                   ////////////-->
+					<div class="col-md-4 col-xs-4">
+						<button class="enviarInversion">{{_ "Fase1Alumno.TXTenviarInversion"}} </button>
+					</div>
+
+				</div>  <!-- fin de row -->
+
+
+			</div><!-- fin de tabla -->
+
+		</div><!-- fin de row -->
+			
+		
+		
+
+
+
+
+
+
+	</div><!-- fin de container -->
+		
+
+
+
+</template>
+
+
+<template name="cashfase">
+			<h1>{{_ "Fase1Alumno.TXTtitulo"}} </h1>
+		
+
+		<div class="row">
+
+			<div class="col-md-4 col-xs-4">
+			<h3> {{_ "Fase1Alumno.TXTdineroInicial"}}  {{dineroInicial}}</h3>
+			</div>
+
+			<div class="col-md-4 col-xs-4">
+			
+			</div>
+  <!--
+			<div class="col-md-4 col-xs-4">
+			<h3> Dinero invertido: {{valueDineroInvertidoTotal 4}}   </h3>
+			</div>
+	-->
+
+		</div>
+	
+</template>
+
+<template name="selectHighIncome">
+	<!--   {{dropCanales}}   -->
+
+	{{> dropdown drop=dropCanales id="listCanalesHighIncome"}}
+
+
+
+ <!-- 
+						<select class="form-control" id="select0" name="select0">
+						 <option value = "0" selected="selected" eficiencia="0"> Stay </option>
+						 
+						  {{#each op in opciones}}
+						  <option value="{{op.costo}}" segmento="{{fidelidadSegmento}}" canal="{{op.nombreCanal}}" eficiencia="{{op.eficiencia}}">   {{op.nombreCanal}} ,{{_ "Fase1Alumno.TXTprobabilidadExito"}}: {{op.eficiencia}}</option>costo
+						  {{/each}}
+						  
+						  
+						</select>
+						-->
+
+</template>
+
+<template name="selectInnovators">
+
+	{{> dropdown drop=dropCanales id="listCanalesInnovators"}}
+				
+</template>
+
+<template name="selectFamilyFirst">
+
+	{{> dropdown drop=dropCanales id="listCanalesFamilyFirst"}}
+				
+</template>
+
+<template name="selectStatusSeekers">
+
+	{{> dropdown drop=dropCanales id="listCanalesStatusSeekers"}}
+				
+</template>
+
+<template name="selectAdventurers">
+
+	{{> dropdown drop=dropCanales id="listCanalesAdventurers"}}
+				
+				
+
+
+<!--     {{> tooltips }}  -->
+</template>
+
+	
+
+
+
+
+
+
+
