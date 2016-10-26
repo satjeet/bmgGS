@@ -117,6 +117,21 @@ Template['pantallaFase1'].onCreated(function() {
   this.firstTmplState.set( 'valorOpcionStatusSeekers',0);
   this.firstTmplState.set( 'valorOpcionAdventurers',0);
 
+  this.firstTmplState.set( 'costoHighIncome',0);
+  this.firstTmplState.set( 'costoInnovators',0);
+  this.firstTmplState.set( 'costoFamilyFirst',0);
+  this.firstTmplState.set( 'costoStatusSeekers',0);
+  this.firstTmplState.set( 'costoAdventurers',0);
+
+  this.firstTmplState.set( 'toolTipHighIncome',"select an option");
+  this.firstTmplState.set( 'toolTipInnovators',"select an option");
+  this.firstTmplState.set( 'toolTipFamilyFirst',"select an option");
+  this.firstTmplState.set( 'toolTipStatusSeekers',"select an option");
+  this.firstTmplState.set( 'toolTipAdventurers',"select an option");
+
+  this.firstTmplState.set( 'dineroInvertidoTotal',0);
+
+
 
   // instance.autorun(function(){
   //   comprobarTimer(instance.data.idFaseA);
@@ -176,21 +191,38 @@ Template.pantallaFase1.helpers({
 
 
    advertenciaSinFondos() {
-    if(Session.get("dineroRestante")<0){
+    //console.log("el dinero incial es "+Grupos.findOne().dineroInicial);
+    console.log("el dinero invertido es "+Template.instance().firstTmplState.get('dineroInvertidoTotal') );
+
+    console.log("dinero de grupo222222 " +Segmentos.findOne().dineroInicial);
+
+
+    if( Template.instance().firstTmplState.get('dineroInvertidoTotal')>Segmentos.findOne().dineroInicial){
       return "el dinero es negativo"
     }else return "";
+
+    
+    return "hola";
   },
 
-  "valueDineroInvertidoTotal": function(nsegmentos){
-    var inverSegmento=0;
-    var digitos=parseInt(nsegmentos)+1;
-    
-    for( i=0;i < digitos;i++){
-      inverSegmento=inverSegmento+dineroInvertidoTotal(i);
-    }
-    
-    resumenDineroInvertidoTotal();
+  "valueDineroInvertidoTotal": function(){
+  
+        
+        var opcionSelecionada1=Template.instance().firstTmplState.get('costoHighIncome');
+        var opcionSelecionada2=Template.instance().firstTmplState.get('costoInnovators');
+        var opcionSelecionada3=Template.instance().firstTmplState.get('costoFamilyFirst');
+        var opcionSelecionada4=Template.instance().firstTmplState.get('costoStatusSeekers');
+        var opcionSelecionada5=Template.instance().firstTmplState.get('costoAdventurers');
+
+
+        var inverSegmento=parseInt(opcionSelecionada1+opcionSelecionada2+opcionSelecionada3+opcionSelecionada4+opcionSelecionada5);
+        console.log("viendo: "+opcionSelecionada1);
+        console.log("algo: "+inverSegmento);
+        Template.instance().firstTmplState.set('dineroInvertidoTotal',inverSegmento);
     return inverSegmento;
+
+
+
       },
       "dineroInicial" : function(){
          // console.log("entra");
@@ -283,18 +315,91 @@ Template.pantallaFase1.helpers({
     //console.log(" el costo del valor es pantalla0: "+Template.instance().valor.get());
     switch(segment){
       case 0:
-      console.log("el segmento fue 0");
-        return  Template.instance().firstTmplState.get('valorOpcionHighIncome');
+        var size=Segmentos.findOne().segmentos[0].size;
+        var opcionSelecionada=Template.instance().firstTmplState.get('valorOpcionHighIncome');
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+        }else{
+        var costoCanal=Canales.findOne().canal[opcionSelecionada-1].costo;
+
+        }
+        var costoCanalSegmento=size*costoCanal;
+
+      console.log("el valor de size es: "+size);
+      console.log("el valor de costo canal segmento: "+costoCanalSegmento);
+        
+
+        Template.instance().firstTmplState.set('costoHighIncome',costoCanalSegmento);
+
+        return  costoCanalSegmento;
       case 1:
-      console.log("el segmento fue 1");
-        return  Template.instance().firstTmplState.get('valorOpcionInnovators');
+        var size=Segmentos.findOne().segmentos[1].size;
+        var opcionSelecionada=Template.instance().firstTmplState.get('valorOpcionInnovators');
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+        }else{
+        var costoCanal=Canales.findOne().canal[opcionSelecionada-1].costo;
+
+        }
+        var costoCanalSegmento=size*costoCanal;
+
+
+        console.log("el valor de size es: "+size)
+        Template.instance().firstTmplState.set('costoInnovators',costoCanalSegmento);
+
+        return  costoCanalSegmento;
+
       case 2:
-      console.log("el segmento fue 2");
-        return  Template.instance().firstTmplState.get('valorOpcionFamilyFirst');
+         var size=Segmentos.findOne().segmentos[2].size;
+        var opcionSelecionada=Template.instance().firstTmplState.get('valorOpcionFamilyFirst');
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+        }else{
+        var costoCanal=Canales.findOne().canal[opcionSelecionada-1].costo;
+
+        }
+        var costoCanalSegmento=size*costoCanal;
+
+
+        console.log("el valor de size es: "+size)
+        Template.instance().firstTmplState.set('costoFamilyFirst',costoCanalSegmento);
+
+        return  costoCanalSegmento;
+
       case 3:
-        return  Template.instance().firstTmplState.get('valorOpcionStatusSeekers');
+        var size=Segmentos.findOne().segmentos[3].size;
+        var opcionSelecionada=Template.instance().firstTmplState.get('valorOpcionStatusSeekers');
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+        }else{
+        var costoCanal=Canales.findOne().canal[opcionSelecionada-1].costo;
+
+        }
+        var costoCanalSegmento=size*costoCanal;
+
+
+        console.log("el valor de size es: "+size);
+        Template.instance().firstTmplState.set('costoStatusSeekers',costoCanalSegmento);
+
+        return  costoCanalSegmento;
+
       case 4:
-        return  Template.instance().firstTmplState.get('valorOpcionAdventurers');
+        var size=Segmentos.findOne().segmentos[4].size;
+        var opcionSelecionada=Template.instance().firstTmplState.get('valorOpcionAdventurers');
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+        }else{
+        var costoCanal=Canales.findOne().canal[opcionSelecionada-1].costo;
+
+        }
+        var costoCanalSegmento=size*costoCanal;
+
+
+        console.log("el valor de size es: "+size);
+        Template.instance().firstTmplState.set('costoAdventurers',costoCanalSegmento);
+
+        return  costoCanalSegmento;
+
       default:
       console.log("el segmento default");
         
@@ -456,10 +561,11 @@ Template.selectHighIncome.helpers({
       
     },
 
-  
-      
+  tasaExito:function(){
 
-      
+        return Template.instance().firstTmplState.get('toolTipHighIncome');
+  },
+  
    });
 
 
@@ -493,7 +599,30 @@ Template.selectHighIncome.events({
   //template.firstTmplState.set( 'valorOpcion', valorOpcion );
   //template.valor.set( valorOpcion );
  
+  },
+  'mouseenter #listCanalesHighIncome li': function(event,template) {
+    //console.log(event)
+    let valorOpcion = event.target.dataset.val;
+    console.log("estoy sobre la opcion"+valorOpcion);
 
+     var size=Segmentos.findOne().segmentos[0].size;
+        var opcionSelecionada=valorOpcion;
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+          var textoToolTip="Hacer nada, no tiene costo";
+        }else{
+          var canalSeleccionado=Canales.findOne().canal[opcionSelecionada-1];
+          var costoCanal=canalSeleccionado.costo;
+
+          var eficienciaCanal=canalSeleccionado.eficiencia *100;
+          
+          var costoCanalSegmento=size*costoCanal;
+
+          var textoToolTip="La Eficiencia del canal es "+eficienciaCanal+"% y su costo es "+costoCanalSegmento;
+
+        }
+
+    Template.instance().firstTmplState.set('toolTipHighIncome',textoToolTip);
 
   },
 
@@ -543,8 +672,34 @@ Template.selectInnovators.events({
   
   },
 
-   });
+  'mouseenter #listCanalesInnovators li': function(event,template) {
+    //console.log(event)
+    let valorOpcion = event.target.dataset.val;
+    console.log("estoy sobre la opcion"+valorOpcion);
 
+     var size=Segmentos.findOne().segmentos[1].size;
+        var opcionSelecionada=valorOpcion;
+
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+          var textoToolTip="Hacer nada, no tiene costo";
+        }else{
+          var canalSeleccionado=Canales.findOne().canal[opcionSelecionada-1];
+          var costoCanal=canalSeleccionado.costo;
+
+          var eficienciaCanal=canalSeleccionado.eficiencia*100;
+
+          var costoCanalSegmento=size*costoCanal;
+
+          var textoToolTip="La Eficiencia del canal es "+eficienciaCanal+"% y su costo es "+costoCanalSegmento;
+
+        }
+
+    Template.instance().firstTmplState.set('toolTipInnovators',textoToolTip);
+
+  },
+
+   });
 
 Template.selectInnovators.helpers({
   dropCanales:function() {
@@ -607,7 +762,16 @@ Template.selectInnovators.helpers({
          return filtrosCanales(1);
 
       }, // entrego el valor de la inversion High Income al label de al lado
+      tasaExito:function(){
+
+
+
+        return Template.instance().firstTmplState.get('toolTipInnovators');
+      },
+
+
         "verdadDineroRestante": function(){
+      
       //var nombrePartida= Session.get("nombredelapartida");
       //var partida=Partidas.findOne({'npartida':nombrePartida}) || false;
       //var usuario=arrayDelUsuario(nombrePartida);
@@ -684,7 +848,35 @@ Template.selectFamilyFirst.events({
    
 
 
-},
+  },
+
+  'mouseenter #listCanalesFamilyFirst li': function(event,template) {
+    //console.log(event)
+    var valorOpcionFamilyFirst = event.target.dataset.val;
+    console.log("estoy sobre la opcion"+valorOpcionFamilyFirst);
+
+     var size=Segmentos.findOne().segmentos[2].size;
+        var opcionSelecionada=valorOpcionFamilyFirst;
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+          var textoToolTip="Hacer nada, no tiene costo";
+        }else{
+          var canalSeleccionado=Canales.findOne().canal[opcionSelecionada-1];
+          var costoCanal=canalSeleccionado.costo;
+
+          var eficienciaCanal=canalSeleccionado.eficiencia*100;
+          
+          var costoCanalSegmento=size*costoCanal;
+
+          var textoToolTip="La Eficiencia del canal es "+eficienciaCanal+"% y su costo es "+costoCanalSegmento;
+
+        }
+
+    Template.instance().firstTmplState.set('toolTipFamilyFirst',textoToolTip);
+
+  },
+
+
 
    });
 Template.selectFamilyFirst.helpers({
@@ -772,6 +964,10 @@ Template.selectFamilyFirst.helpers({
       else{return false}
       
     },
+   tasaExito:function(){
+
+        return Template.instance().firstTmplState.get('toolTipFamilyFirst');
+  },
 
    });
 
@@ -812,6 +1008,33 @@ Template.selectStatusSeekers.events({
     
     Template.instance().firstTmplState.set('valorOpcionStatusSeekers',valorOpcionStatusSeekers);
   
+  },
+
+
+    'mouseenter #listCanalesStatusSeekers li': function(event,template) {
+    //console.log(event)
+    let valorOpcion = event.target.dataset.val;
+    console.log("estoy sobre la opcion"+valorOpcion);
+
+     var size=Segmentos.findOne().segmentos[3].size;
+        var opcionSelecionada=valorOpcion;
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+          var textoToolTip="Hacer nada, no tiene costo";
+        }else{
+          var canalSeleccionado=Canales.findOne().canal[opcionSelecionada-1];
+          var costoCanal=canalSeleccionado.costo;
+
+          var eficienciaCanal=canalSeleccionado.eficiencia *100;
+          
+          var costoCanalSegmento=size*costoCanal;
+
+          var textoToolTip="La Eficiencia del canal es "+eficienciaCanal+"% y su costo es "+costoCanalSegmento;
+
+        }
+
+    Template.instance().firstTmplState.set('toolTipStatusSeekers',textoToolTip);
+
   },
 
    });
@@ -895,6 +1118,11 @@ Template.selectStatusSeekers.helpers({
       else{return false}
       
     },
+
+  tasaExito:function(){
+
+        return Template.instance().firstTmplState.get('toolTipStatusSeekers');
+  },
    });
 
 ////////// Fase 1 : cambio selectAdventurers
@@ -935,6 +1163,32 @@ Template.selectAdventurers.events({
     
     Template.instance().firstTmplState.set('valorOpcionAdventurers',valorOpcionAdventurers);
   
+  },
+
+      'mouseenter #listCanalesAdventurers li': function(event,template) {
+    //console.log(event)
+    let valorOpcion = event.target.dataset.val;
+    console.log("estoy sobre la opcion"+valorOpcion);
+
+     var size=Segmentos.findOne().segmentos[4].size;
+        var opcionSelecionada=valorOpcion;
+        if(opcionSelecionada==0){
+          var costoCanal=0;
+          var textoToolTip="Hacer nada, no tiene costo";
+        }else{
+          var canalSeleccionado=Canales.findOne().canal[opcionSelecionada-1];
+          var costoCanal=canalSeleccionado.costo;
+
+          var eficienciaCanal=canalSeleccionado.eficiencia *100;
+          
+          var costoCanalSegmento=size*costoCanal;
+
+          var textoToolTip="La Eficiencia del canal es "+eficienciaCanal+"% y su costo es "+costoCanalSegmento;
+
+        }
+
+    Template.instance().firstTmplState.set('toolTipAdventurers',textoToolTip);
+
   },
 
 
@@ -1025,6 +1279,11 @@ Template.selectAdventurers.helpers({
       else{return false}
       
     },
+
+   tasaExito:function(){
+
+        return Template.instance().firstTmplState.get('toolTipAdventurers');
+  },
    });
 
 

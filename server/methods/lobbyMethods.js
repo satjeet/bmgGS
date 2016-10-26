@@ -193,6 +193,7 @@ Meteor.methods({
           //Vector6:{1,1,1,0,0,0}
           var canal = [];
           canal=[
+                  //{nombreCanal:"Do nothing",opcion:0,costo:0,eficiencia:1,vector6:[1,1,1,1,1,1]},
                   {nombreCanal:"TV ad",opcion:1,costo:3,eficiencia:0.8,vector6:[1,1,1,0,0,0]},
                   {nombreCanal:"Magazine ad",opcion:2,costo:2,eficiencia:0.7,vector6:[1,1,1,0,0,0]},
                   {nombreCanal:"POS ad",opcion:3,costo:2,eficiencia:0.6,vector6:[0,1,1,1,1,0]},

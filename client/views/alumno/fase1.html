@@ -185,7 +185,7 @@
 					</div>
 
 					<div class="col-md-4 col-xs-4">
-					<h3> {{_ "Fase1Alumno.TXTdineroInvertido"}} {{valueDineroInvertidoTotal 4}}   </h3>
+					<h3> {{_ "Fase1Alumno.TXTdineroInvertido"}} {{valueDineroInvertidoTotal}}   </h3>
 					</div>
 
 				</div>
@@ -227,17 +227,8 @@
 
 		</div><!-- fin de row -->
 			
-		
-		
-
-
-
-
-
 
 	</div><!-- fin de container -->
-		
-
 
 
 </template>
@@ -246,7 +237,6 @@
 <template name="cashfase">
 			<h1>{{_ "Fase1Alumno.TXTtitulo"}} </h1>
 		
-
 		<div class="row">
 
 			<div class="col-md-4 col-xs-4">
@@ -256,63 +246,50 @@
 			<div class="col-md-4 col-xs-4">
 			
 			</div>
-  <!--
-			<div class="col-md-4 col-xs-4">
-			<h3> Dinero invertido: {{valueDineroInvertidoTotal 4}}   </h3>
-			</div>
-	-->
 
 		</div>
 	
 </template>
 
+
+
 <template name="selectHighIncome">
 	<!--   {{dropCanales}}   -->
 
-	{{> dropdown drop=dropCanales id="listCanalesHighIncome"}}
+	
+<span data-toggle="tooltip" data-original-title="" title={{tasaExito}} > {{> dropdown drop=dropCanales id="listCanalesHighIncome"}}</span>
 
-
-
- <!-- 
-						<select class="form-control" id="select0" name="select0">
-						 <option value = "0" selected="selected" eficiencia="0"> Stay </option>
-						 
-						  {{#each op in opciones}}
-						  <option value="{{op.costo}}" segmento="{{fidelidadSegmento}}" canal="{{op.nombreCanal}}" eficiencia="{{op.eficiencia}}">   {{op.nombreCanal}} ,{{_ "Fase1Alumno.TXTprobabilidadExito"}}: {{op.eficiencia}}</option>costo
-						  {{/each}}
-						  
-						  
-						</select>
-						-->
 
 </template>
+
 
 <template name="selectInnovators">
 
-	{{> dropdown drop=dropCanales id="listCanalesInnovators"}}
+<span data-toggle="tooltip" data-original-title="" title={{tasaExito }} >{{> dropdown drop=dropCanales id="listCanalesInnovators"}}</span>
 				
 </template>
+
 
 <template name="selectFamilyFirst">
 
-	{{> dropdown drop=dropCanales id="listCanalesFamilyFirst"}}
-				
+<span data-toggle="tooltip" data-original-title="" title={{tasaExito }} >{{> dropdown drop=dropCanales id="listCanalesFamilyFirst"}}</span>
+
 </template>
+
 
 <template name="selectStatusSeekers">
 
-	{{> dropdown drop=dropCanales id="listCanalesStatusSeekers"}}
+	
+<span data-toggle="tooltip" data-original-title="" title={{tasaExito }} >{{> dropdown drop=dropCanales id="listCanalesStatusSeekers"}}</span>
+	
 				
 </template>
 
+
 <template name="selectAdventurers">
 
-	{{> dropdown drop=dropCanales id="listCanalesAdventurers"}}
-				
-				
+<span data-toggle="tooltip" data-original-title="" title={{tasaExito }} >{{> dropdown drop=dropCanales id="listCanalesAdventurers"}}</span>
 
-
-<!--     {{> tooltips }}  -->
 </template>
 
 	
