@@ -164,7 +164,7 @@ Router.route('/faseB/:_id',{
       console.log("suscribiendo al profesor en fase b");
       return [this.subscribe('PartidaActual', this.params._id),
               this.subscribe('Grupos', this.params._id),
-              this.subscribe('losSegmentos'),
+              this.subscribe('misSegmentosPartida',this.params._id),
               this.subscribe('PartidaDataActual',this.params._id),
               
               ];

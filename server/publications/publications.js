@@ -26,6 +26,12 @@ Meteor.publish('misCanalesProfesor',function(){
     return canal;
 });
 
+Meteor.publish('misSegmentosPartida',function(_idPartida){
+
+  segmentosPartida=Segmentos.find({idPartida:_idPartida});
+  return segmentosPartida;
+  });
+
 
 Meteor.publish('miGrupo',function(){
   var userId =this.userId;
@@ -136,7 +142,7 @@ var toType = function(obj) {
   return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
 }
 
-
+/*
 Meteor.publish('misSegmentosProfesor',function(){
   var userId =this.userId;
   console.log("user id: " + userId);
@@ -167,7 +173,7 @@ Meteor.publish('misSegmentosProfesor',function(){
  // }
   //return this.ready();
 });
-
+*/
 Meteor.publish("misCanalesPartidas", function(_idPartida){
   check(_idPartida, String);
   return Canales.find({idPartida:{$regex:'^'+_idPartida}});

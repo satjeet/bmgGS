@@ -246,11 +246,11 @@ Meteor.methods({
           //Vector6:{1,1,1,0,0,0}
           var segmentos=[];
           segmentos=[
-            {nombreSegmento:"highIncome",opcion:1,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:40,margin:20,value:800},
-            {nombreSegmento:"innovators",opcion:2,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:20,margin:16,value:320},
-            {nombreSegmento:"familyFirst",opcion:3,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:100,margin:8,value:800},
-            {nombreSegmento:"statusSeekers",opcion:4,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:20,margin:32,value:640},
-            {nombreSegmento:"adventurers",opcion:5,marketShare:1,canalPicked:"",eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:40,margin:16,value:640},
+            {nombreSegmento:"highIncome",opcion:1,marketShare:1,canalPicked:0,eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:40,margin:20,value:800},
+            {nombreSegmento:"innovators",opcion:2,marketShare:1,canalPicked:0,eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:20,margin:16,value:320},
+            {nombreSegmento:"familyFirst",opcion:3,marketShare:1,canalPicked:0,eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:100,margin:8,value:800},
+            {nombreSegmento:"statusSeekers",opcion:4,marketShare:1,canalPicked:0,eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:20,margin:32,value:640},
+            {nombreSegmento:"adventurers",opcion:5,marketShare:1,canalPicked:0,eficienciaPicked:0,fidelidad:0,dineroInvertido:0,size:40,margin:16,value:640},
             ];
 
             //var idGrupo= idGrupo;
@@ -262,7 +262,7 @@ Meteor.methods({
               console.log("encontre el segmento al que pertenesco")}else{
                 //el segmento aun no exite, asi que lo creo
             var respuesta=Segmentos.insert({'idPartida':idPartida,'idGrupo':idGrupo,
-              'dineroInicial':250,'dineroInvertido':0,'ganancias':0,'resultado':0,
+              'dineroInicial':250,'dineroInvertido':0,'ganancias':0,'resultado':0,'estadoFase':"jugando",
               'segmentos':segmentos});
             console.log("respuesta id del segmento : "+respuesta);
 
@@ -438,7 +438,53 @@ Meteor.methods({
     } else {
       throw new Meteor.Error(500, "Su session ha caducado");
     }
-  }
+  },
+
+
+  TerminoFase1: function(canalesElegidos,dineroInvertido,IdUser, idPartida) {
+
+    if (Meteor.user != null) {
+     
+  console.log("valor de inversion", canalesElegidos);
+console.log("valor de userId"+ IdUser);
+
+  console.log("valor de idPartida"+ idPartida);
+ 
+
+ var grupo = Grupos.findOne({ idPartida: idPartida,
+    miembros: {
+      $elemMatch: {
+        $eq: IdUser
+      }
+    }
+  });
+
+ console.log("el id del grupo que llamo "+grupo._id);
+
+  Segmentos.update({idPartida:idPartida, idGrupo:grupo._id}, {
+      $set: {
+
+        "dineroInvertido": dineroInvertido,
+        "estadoFase": "esperando",
+        "segmentos.0.canalPicked":canalesElegidos.valorOpcionHighIncome,
+        "segmentos.1.canalPicked":canalesElegidos.valorOpcionInnovators,
+        "segmentos.2.canalPicked":canalesElegidos.valorOpcionFamilyFirst,
+        "segmentos.3.canalPicked":canalesElegidos.valorOpcionStatusSeekers,
+        "segmentos.4.canalPicked":canalesElegidos.valorOpcionAdventurers,
+
+
+      }
+    });
+
+    } else {
+      throw new Meteor.Error(500, "Su session ha caducado");
+    }
+
+  },
+
+
+
+
 });
 
 //Remueve al usuario del grupo actual

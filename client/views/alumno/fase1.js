@@ -32,52 +32,22 @@ function resumenDineroInvertidoTotal(){
 
 }
 
-/*
-function arrayDelUsuario(nomPartida){
-  if(Meteor.user())
-  {
-  
-    partida=Partidas.findOne({'npartida':nomPartida});
-    
-    var users=partida.usuarios;  
-    var poli={};
-    users.forEach(function(usuario){
-      if(usuario.name==Meteor.user().username){
-        poli=usuario;  
-      }
-    });
-    return poli;
-
-  }else{console.log(" falta un usuario");}
-
-
-
-}
-
-*/
 
 
 function filtrosCanales(nseg){
-
-    //lista de los canales que tienen el vector6[segmentos.highIncome]
-      //  var nombrePartida= Session.get("nombredelapartida");
-       // partida=Partidas.findOne({'npartida':nombrePartida});
-       // var usuario=arrayDelUsuario(nombrePartida);
-        //console.log("el usuario es " + usuario.name);
-        //var ofi= Partidas.findOne({'grupos.name':'satjeet'}) || false;
     
-      if(Meteor.user()){
-          //canales=Partidas.findOne({'grupos.name':'satjeet'}).canales;
-          var canales=Canales.findOne().canal;
-          
-          var filtroCanal=[]
-          canales.forEach(function(canal){
-            //console.log(canal.nombre);
-            if(canal.vector6[fidelidadNumero(nseg)]==1)  filtroCanal.push(canal);
-          });
-          //console.log(filtroCanal);
-          return filtroCanal;
-      }else return false; 
+  if(Meteor.user()){
+      //canales=Partidas.findOne({'grupos.name':'satjeet'}).canales;
+      var canales=Canales.findOne().canal;
+      
+      var filtroCanal=[]
+      canales.forEach(function(canal){
+        //console.log(canal.nombre);
+        if(canal.vector6[fidelidadNumero(nseg)]==1)  filtroCanal.push(canal);
+      });
+      //console.log(filtroCanal);
+      return filtroCanal;
+  }else return false; 
 
 }
 
@@ -96,16 +66,21 @@ function fidelidadNumero(nsegmento){
 
 }
 
+function textofidelidad(fidelidad){
 
 
+ if(fidelidad==0) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadDesconocido');}
+  else if(fidelidad==1) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadConocido');}
+  else if(fidelidad==2) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadConsiderando');}
+  else if(fidelidad==3) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadProbando');}
+  else if(fidelidad==4) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadRepertorio');}
+  else if(fidelidad==5) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadRegular');}
+  else if(fidelidad==6) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadLeal');}
+  else {var seleccionado="la cague";}
+  return seleccionado;
 
 
-//this._someVariable = "some value"
-//segmento2= Segmentos.findOne();
-
-
-// sigo sin ocupar la instance 
-
+}
 
 Template['pantallaFase1'].onCreated(function() {
   // $('option').tooltip('show');
@@ -131,6 +106,9 @@ Template['pantallaFase1'].onCreated(function() {
 
   this.firstTmplState.set( 'dineroInvertidoTotal',0);
 
+  this.firstTmplState.set( 'dineroVerdad',true);
+
+
 
 
   // instance.autorun(function(){
@@ -141,49 +119,40 @@ Template['pantallaFase1'].onCreated(function() {
 
 
 Template.pantallaFase1.events({
-    'click .enviarInversion': function(event, instance){
-      
-      idpartida=this.id;
-      console.log("boton de dados");
-      var userId =Meteor.userId();
-      console.log("user id: " + userId);
-      var grupo = Grupos.findOne({
-                                 idPartida: idpartida,
-                                 miembros: {
-                                            $in: [userId]
-                                           }
-      });
-   
-      var dineroInicial =grupo.dineroInicial ;
-      //console.log("mi dinero incial es :" + dineroInicial);
-       var dineroRestante= dineroInicial - resumenDineroInvertidoTotal();
+  'click .enviarInversion': function(event, instance){
+    
+    idpartida=this.id;
+    var userId =Meteor.userId();
+    console.log("user id: " + userId);
+ 
+    var instance = Template.instance();
+    var idpartida=instance.data._id;
+    console.log("valor de la idopartida: "+instance.data._id);
+    
+   var dineroInicial =Segmentos.dineroInicial ;
+    //console.log("mi dinero incial es :" + dineroInicial);
+     //var dineroRestante= dineroInicial - resumenDineroInvertidoTotal();
 
-     var segment = Segmentos.findOne({ "idGrupo": grupo._id });
-     console.log("e segmento que tengo es : ", segment);
-      console.log("el dinero restante es : " +dineroRestante);
-      if(dineroRestante<0){
-         //event.target.disabled='true';
-         //alert("tienen que ser postivo");
+    if(Template.instance().firstTmplState.get('dineroVerdad')){
+      var canalesElegidos={
+        valorOpcionHighIncome:Template.instance().firstTmplState.get('valorOpcionHighIncome'),
+        valorOpcionInnovators:Template.instance().firstTmplState.get('valorOpcionInnovators'),
+        valorOpcionFamilyFirst:Template.instance().firstTmplState.get('valorOpcionFamilyFirst'),
+        valorOpcionStatusSeekers:Template.instance().firstTmplState.get('valorOpcionStatusSeekers'),
+        valorOpcionAdventurers:Template.instance().firstTmplState.get('valorOpcionAdventurers')
+      }
+      var dineroInvertido=Template.instance().firstTmplState.get('dineroInvertidoTotal')
+     // console.log("el numero de grupos",Grupos.find().fetch());
+      Meteor.call('TerminoFase1',canalesElegidos,dineroInvertido,userId,idpartida );
+      console.log("envia la inversion");
 
-       }else{
-         //event.target.disabled='false';
-  //         alert("enviando info");
-         Meteor.call('TerminoFase1',idpartida, function(error,resultado){
-          if(error){
-              alert('Error');
-           }else{
-              return Router.go('loading',{id: idpartida}); 
-           }
-         });
+     }else{  
+      console.log("no envia la inversion");
 
+     }
 
-       }
+  },
 
-       // Meteor.call('RollDices',idpartida,segment,grupo);
-        //var resultadoJugador=Session.get("resultadoJugador");
-        //Meteor.call('ActualizarResultado',idpartida,resultadoJugador,grupo);
-
-    },
 });
 
 
@@ -198,11 +167,13 @@ Template.pantallaFase1.helpers({
 
 
     if( Template.instance().firstTmplState.get('dineroInvertidoTotal')>Segmentos.findOne().dineroInicial){
+      Template.instance().firstTmplState.set('dineroVerdad',false)
       return "el dinero es negativo"
-    }else return "";
+    }else {
+      Template.instance().firstTmplState.set('dineroVerdad',true)
+      return "";
+    }
 
-    
-    return "hola";
   },
 
   "valueDineroInvertidoTotal": function(){
@@ -287,15 +258,58 @@ Template.pantallaFase1.helpers({
 
         var segment=parseInt(segment);
         let segmento=Segmentos.findOne();
-        if(segmento.segmentos[segment].eficienciaPicked!=0)
-        {
-        var fidelidad=segmento.segmentos[segment].fidelidad +1 ; // le sumare 1 para que me muestre la siguiente opcion
-        }else {var fidelidad=segmento.segmentos[segment].fidelidad;}
+        //if(segmento.segmentos[segment].eficienciaPicked!=0)
+          //valorOpcionHighIncome
 
-        //console.log("valor de la fidelidad: "+fidelidad);
+         switch(segment){
+            case 0:
+              console.log("caso 0");
+              if(Template.instance().firstTmplState.get('valorOpcionHighIncome')!=0)
+              {
+                console.log("caso 0 entro");
+              var fidelidad=segmento.segmentos[segment].fidelidad +1 ; // le sumare 1 para que me muestre la siguiente opcion
+              }else {var fidelidad=segmento.segmentos[segment].fidelidad;}
+              return textofidelidad(fidelidad);
+            case 1:
+              console.log("caso 1");
+              console.log("si es distinto de "+Template.instance().firstTmplState.get('valorOpcionInnovators') );
+              if(Template.instance().firstTmplState.get('valorOpcionInnovators')!=0)
+              {
+                console.log("caso 1 entro");
+              var fidelidad=segmento.segmentos[segment].fidelidad +1 ; // le sumare 1 para que me muestre la siguiente opcion
+              }else {var fidelidad=segmento.segmentos[segment].fidelidad;}
+              return textofidelidad(fidelidad);
 
-       //console.log("sera por aqui3");
+            case 2:
+              console.log("caso 2");
 
+              if(Template.instance().firstTmplState.get('valorOpcionFamilyFirst')!=0)
+              {
+              var fidelidad=segmento.segmentos[segment].fidelidad +1 ; // le sumare 1 para que me muestre la siguiente opcion
+              }else {var fidelidad=segmento.segmentos[segment].fidelidad;}
+              return textofidelidad(fidelidad);
+
+            case 3:
+              console.log("caso 3");
+
+              if(Template.instance().firstTmplState.get('valorOpcionStatusSeekers')!=0)
+              {
+              var fidelidad=segmento.segmentos[segment].fidelidad +1 ; // le sumare 1 para que me muestre la siguiente opcion
+              }else {var fidelidad=segmento.segmentos[segment].fidelidad;}
+              return textofidelidad(fidelidad);
+
+            case 4:
+              console.log("caso 4");
+
+              if(Template.instance().firstTmplState.get('valorOpcionAdventurers')!=0)
+              {
+              var fidelidad=segmento.segmentos[segment].fidelidad +1 ; // le sumare 1 para que me muestre la siguiente opcion
+              }else {var fidelidad=segmento.segmentos[segment].fidelidad;}
+              return textofidelidad(fidelidad);
+
+          };
+      
+/*
         if(fidelidad==0) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadDesconocido');}
         else if(fidelidad==1) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadConocido');}
         else if(fidelidad==2) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadConsiderando');}
@@ -305,6 +319,8 @@ Template.pantallaFase1.helpers({
         else if(fidelidad==6) {var seleccionado=TAPi18n.__('DBcanales.TXTfidelidadLeal');}
         else {var seleccionado="la cague";}
         return seleccionado;
+
+        */
       },
 
       "valueDineroInvertido" : function(segment){
@@ -500,16 +516,7 @@ Template.selectHighIncome.helpers({
       
         return fidelidad;
       },
-      nombreCanal:function(){
-        var nCanal= Partidas.findOne({'grupos.name':'satjeet'}).canales[fidelidadNumero(0)].nombre
-        return nCanal;
-      },
-       eficienciaCanal:function(){
-        return Partidas.findOne({'grupos.name':'satjeet'}).canales[fidelidadNumero(0)].eficiencia;
-      },
-      opcionCanal:function(){
-        return Partidas.findOne({'grupos.name':'satjeet'}).canales[fidelidadNumero(0)].opcion;
-      },
+
       opciones:function(){//lista de los canales que tienen el vector6[segmentos.highIncome]
         //var nombrePartida= Session.get("nombredelapartida");
         //var partida=Partidas.findOne({'npartida':nombrePartida});

@@ -34,6 +34,11 @@ Schemas.Segmento = new SimpleSchema({
         label: "Resultado",
         optional: true
     },
+    estadoFase: {
+        type: String,
+        label: "Estado Jugador",
+        optional: true
+    },
      segmentos: {
         type: SimpleSchema.Array,
         label: "Los segmentos",
@@ -60,7 +65,7 @@ Schemas.Segmento = new SimpleSchema({
         optional: true
     },
     "segmentos.$.canalPicked": {
-        type: String,
+        type: Number,
         label: "Canal escogido",
         optional: true
     },

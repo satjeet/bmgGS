@@ -16,7 +16,7 @@ Template['faseB'].helpers({
         return 'pantallaFase1';
       case 'profesor':
        // Meteor.call('CrearSegmentos');
-        return 'LoadingProfesor';
+        return 'LoadingProfesorFaseB';
       default:
         return '';
     }

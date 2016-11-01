@@ -1,6 +1,46 @@
-<template name="LoadingProfesor">
+<template name="LoadingProfesorFaseB">
 	<div class="center">
 		<h1>Loading profesor</h1>
+
 		
+
+		{{> alumnosTerminandoTurno}}
+		
+		
+	</div>
+</template>
+
+<template name="alumnosTerminandoTurno">
+
+	<div>
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+
+
+				{{#each grupo in grupos }}
+					<div class="row">
+						<div class="col-md-2 col-xs-2 col-md-offset-4">
+						<h2> {{grupo.nombre}} </h2>
+						</div>
+
+						<div class="col-md-2 col-xs-2">
+						<h2> {{grupo.estado}}</h2>
+						</div>
+					</div>
+				{{/each }}
+
+				
+					<!-- <button class="EmpezarTurno">{{_ "Fase0Profesor.BTNempezarFase1"}} </button>  -->
+
+					<button type="button"  class=" comenzarFase2 btn btn-primary btn-lg btn-block">Avanzar</button>
+					
+
+					
+				
+
+			</div>
+
+
+		</div>
 	</div>
 </template>
