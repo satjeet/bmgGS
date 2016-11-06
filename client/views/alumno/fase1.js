@@ -134,6 +134,7 @@ Template.pantallaFase1.events({
      //var dineroRestante= dineroInicial - resumenDineroInvertidoTotal();
 
     if(Template.instance().firstTmplState.get('dineroVerdad')){
+      //si dineroVerdad es cierto(positiv)o se sigue
       var canalesElegidos={
         valorOpcionHighIncome:Template.instance().firstTmplState.get('valorOpcionHighIncome'),
         valorOpcionInnovators:Template.instance().firstTmplState.get('valorOpcionInnovators'),
@@ -143,8 +144,13 @@ Template.pantallaFase1.events({
       }
       var dineroInvertido=Template.instance().firstTmplState.get('dineroInvertidoTotal')
      // console.log("el numero de grupos",Grupos.find().fetch());
-      Meteor.call('TerminoFase1',canalesElegidos,dineroInvertido,userId,idpartida );
-      console.log("envia la inversion");
+      Meteor.call('TerminoFase1',canalesElegidos,dineroInvertido,userId,idpartida , function(error,resultado){
+          if(error){
+              alert('Error');
+           }else{
+              return true;
+           }
+         });
 
      }else{  
       console.log("no envia la inversion");

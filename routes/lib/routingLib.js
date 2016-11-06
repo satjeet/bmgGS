@@ -9,6 +9,10 @@ Meteor.GL.Routing = {
       rutaCorrecta = '/faseA/' + partida._id;
     }else if(partida.estadoActual == "FaseB"){
       rutaCorrecta = '/faseB/' + partida._id;
+    }else if(partida.estadoActual == "FaseC"){
+      rutaCorrecta = '/faseC/' + partida._id;
+          }else if(partida.estadoActual == "FaseD"){
+      rutaCorrecta = '/faseD/' + partida._id;
     }else if(partida.estadoActual == "Finalizada"){
       rutaCorrecta = '/';
     }
@@ -23,6 +27,13 @@ Meteor.GL.Routing = {
   isFaseB: function(estadoActual){
     return estadoActual == "FaseB";
   },
+  isFaseC: function(estadoActual){
+    return estadoActual == "FaseC";
+  },
+    isFaseD: function(estadoActual){
+    return estadoActual == "FaseD";
+  },
+
 
   
 }

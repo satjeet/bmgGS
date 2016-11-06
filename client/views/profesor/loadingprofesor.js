@@ -93,7 +93,7 @@ Template.alumnosTerminandoTurno.helpers({
 
 
 		}
-		
+
 			console.log("info de misgrupos ", JSON.parse(JSON.stringify(misgrupos)));
 
 		return misgrupos;
@@ -102,4 +102,28 @@ Template.alumnosTerminandoTurno.helpers({
 
 
 });
+
+
+Template.alumnosTerminandoTurno.events({
+  'click .comenzarFaseC': function(event, instance){
+ 
+    var instance = Template.instance();
+    var idpartida=instance.data._id;
+    console.log("valor de la idopartida: "+instance.data._id);
+    //aqui podria ir un control que solo deje avanzar si todos estan listos, o asigne valores a los que no estuvieron listos
+   
+      Meteor.call('siguienteFase',idpartida , function(error,resultado){
+          if(error){
+              alert('Error');
+           }else{
+              return true;
+           }
+         });
+
+    
+
+  },
+
+});
+
 

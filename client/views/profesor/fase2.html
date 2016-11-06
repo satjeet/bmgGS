@@ -1,0 +1,108 @@
+
+
+<template name="pantallaFase2">
+
+	<div class="container">
+
+		<!-- 
+			 we have 1 row that contains 2 columns
+		     one for the thumbnails and one for the 
+		     main reader view
+		-->
+
+		<div class="row">
+			
+			<h1> {{_ "Fase2Profesor.TXTtitulo"}}</h1>
+
+		</div>
+
+		<div class="row">
+			
+			
+			<div class="col-md-3 col-xs-3">
+			</div>
+
+			<div class="col-md-3 col-xs-3">
+			</div>
+
+			<div class="col-md-3 col-xs-3">
+			</div>
+	
+			<div class="col-md-3 col-xs-3">
+			<button class="pasarFaseD">{{_ "Fase2Profesor.BTNpasarFase3"}} </button>
+			</div>
+
+
+		</div>
+
+
+
+		<div class="row">
+
+			<div class="col-md-4 col-xs-4">
+			<h3> </h3>
+			</div>
+
+			<div class="col-md-4 col-xs-4">
+			</div>
+
+			<div class="col-md-4 col-xs-4">
+			<h3> </h3>
+			</div>
+
+		</div>  <!-- fin de row -->
+
+		<div class="row ">
+			<table class="table table-striped">
+				<tr>
+					<td> <h3>{{_ "Fase2Profesor.TXTequipos"}}Grupos</h3></td>
+					<td> <h3>{{_ "Fase2Profesor.TXTsegmentosIngresoAlto"}} </h3></td>
+					<td> <h3>{{_ "Fase2Profesor.TXTsegmentosInnovadores"}}</h3></td>
+					<td> <h3>{{_ "Fase2Profesor.TXTsegmentosPriorizaFamilia"}} </h3></td>
+					<td><h3>{{_ "Fase2Profesor.TXTsegmentosBuscadoresStatus"}} </h3></td>
+					<td> <h3>{{_ "Fase2Profesor.TXTsegmentosAventureros"}}</h3></td>
+				</tr>
+				
+					{{>resumenElecciones}}
+
+			</table><!-- fin de tabla -->
+
+		</div><!-- fin de row -->
+			
+		
+		
+	</div><!-- fin de container -->
+
+</template>
+
+	
+<template name="resumenElecciones">
+
+{{#each grupo in Grupos}}
+	<tr>
+		<td> {{grupo.nombre}}</td>
+
+		
+		<td> {{textoFidelidad grupo 0}}</td>
+		<td> {{textoFidelidad grupo 1}}</td>
+		<td> {{textoFidelidad grupo 2}}</td>
+		<td> {{textoFidelidad grupo 3}}</td>
+		<td> {{textoFidelidad grupo 4}}</td>
+
+	
+
+
+	</tr>
+{{/each}}
+
+</template>
+
+
+
+
+
+
+
+
+
+

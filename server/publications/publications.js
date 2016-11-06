@@ -1,6 +1,19 @@
 
 Meteor.publish('losGrupos',function(){
+  //aqui tengo que filtrar los grupos, para que 
+
   return Grupos.find();
+});
+
+Meteor.publish('losGruposFiltrados',function(_idPartida){
+  //aqui tengo que filtrar los grupos, para que 
+var losGrupos=Grupos.find({idPartida:_idPartida, 
+                            nombre :{
+                                    $ne :"Sin Grupo"
+                                    }
+});
+
+  return losGrupos;
 });
 
 Meteor.publish('losSegmentos',function(){

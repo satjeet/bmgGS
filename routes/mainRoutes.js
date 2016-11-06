@@ -205,3 +205,122 @@ Router.route('/faseB/:_id',{
     
 
 });
+
+
+Router.route('/faseC/:_id',{
+  name: 'faseC',
+    waitOn: function(){
+    
+    if(Roles.getRolesForUser(Meteor.userId())[0]=="alumno"){
+      return [this.subscribe('PartidaActual', this.params._id),
+              this.subscribe('miSegmento', this.params._id),
+              this.subscribe('misCanalesPartidas', this.params._id),
+              
+              ];
+    }
+    if(Roles.getRolesForUser(Meteor.userId())[0]=="profesor"){
+      console.log("suscribiendo al profesor en fase C");
+      return [this.subscribe('PartidaActual', this.params._id),
+             this.subscribe('losGruposFiltrados',this.params._id),
+              this.subscribe('misSegmentosPartida',this.params._id),
+              this.subscribe('PartidaDataActual',this.params._id),
+              this.subscribe('misCanalesPartidas', this.params._id),
+
+              
+              ];
+    }
+    
+  },
+ 
+   action: function() {
+    if(this.ready()){
+      if (GS_usuarios.userLoggedIn(this)) {
+        console.log("rutas partida");
+        var partida = Partidas.findOne({_id:{$regex:'^'+this.params._id}});
+        if(partida != null){
+          if(routing.isFaseC(partida.estadoActual)){
+            console.log("deberia entrar a faseC");
+            this.render('faseC');
+          }else{
+            routing.redireccionarPartida(partida);
+          }
+        }else{
+          console.log("vamos a partidas");
+          Router.go('/');
+        }
+      }
+    }
+  },
+   subscriptions: function(){
+   this.subscribe('users');
+  },
+
+   data: function() {
+      return Partidas.findOne({_id:{$regex:'^'+this.params._id}});
+    },
+
+
+
+    
+
+});
+
+
+
+Router.route('/faseD/:_id',{
+  name: 'faseD',
+    waitOn: function(){
+    
+    if(Roles.getRolesForUser(Meteor.userId())[0]=="alumno"){
+      return [this.subscribe('PartidaActual', this.params._id),
+              this.subscribe('miSegmento', this.params._id),
+              this.subscribe('misCanalesPartidas', this.params._id),
+              
+              ];
+    }
+    if(Roles.getRolesForUser(Meteor.userId())[0]=="profesor"){
+      console.log("suscribiendo al profesor en fase D");
+      return [this.subscribe('PartidaActual', this.params._id),
+             this.subscribe('losGruposFiltrados',this.params._id),
+              this.subscribe('misSegmentosPartida',this.params._id),
+              this.subscribe('PartidaDataActual',this.params._id),
+              this.subscribe('misCanalesPartidas', this.params._id),
+              
+              
+              ];
+    }
+    
+  },
+ 
+   action: function() {
+    if(this.ready()){
+      if (GS_usuarios.userLoggedIn(this)) {
+        console.log("rutas partida");
+        var partida = Partidas.findOne({_id:{$regex:'^'+this.params._id}});
+        if(partida != null){
+          if(routing.isFaseC(partida.estadoActual)){
+            console.log("deberia entrar a faseD");
+            this.render('faseD');
+          }else{
+            routing.redireccionarPartida(partida);
+          }
+        }else{
+          console.log("vamos a partidas");
+          Router.go('/');
+        }
+      }
+    }
+  },
+   subscriptions: function(){
+   this.subscribe('users');
+  },
+
+   data: function() {
+      return Partidas.findOne({_id:{$regex:'^'+this.params._id}});
+    },
+
+
+
+    
+
+});
