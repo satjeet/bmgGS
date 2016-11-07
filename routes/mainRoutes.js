@@ -298,7 +298,7 @@ Router.route('/faseD/:_id',{
         console.log("rutas partida");
         var partida = Partidas.findOne({_id:{$regex:'^'+this.params._id}});
         if(partida != null){
-          if(routing.isFaseC(partida.estadoActual)){
+          if(routing.isFaseD(partida.estadoActual)){
             console.log("deberia entrar a faseD");
             this.render('faseD');
           }else{

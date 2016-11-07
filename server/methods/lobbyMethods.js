@@ -547,6 +547,9 @@ function nextFase(_idPartida) {
   fases.FaseA = {};
   fases.FaseB = {};
   fases.FaseC = {};
+  fases.FaseD = {};
+  fases.FaseE = {};
+
 /*fases.Fase0 = Fases0.findOne({
     idPartida: _idPartida
   });

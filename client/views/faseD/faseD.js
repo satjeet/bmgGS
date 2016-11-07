@@ -23,6 +23,6 @@ Template['faseD'].helpers({
   }
 });
 
-Template['faseC'].events({
+Template['faseD'].events({
 
 });
