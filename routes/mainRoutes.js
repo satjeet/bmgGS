@@ -273,7 +273,10 @@ Router.route('/faseD/:_id',{
     
     if(Roles.getRolesForUser(Meteor.userId())[0]=="alumno"){
       return [this.subscribe('PartidaActual', this.params._id),
-              this.subscribe('miSegmento', this.params._id),
+              //this.subscribe('miSegmento', this.params._id),
+              this.subscribe('misSegmentosPartida',this.params._id),
+
+             this.subscribe('losGruposFiltrados',this.params._id),
               this.subscribe('misCanalesPartidas', this.params._id),
               
               ];

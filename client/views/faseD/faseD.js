@@ -13,7 +13,7 @@ Template['faseD'].helpers({
         //console.log("informacion de THIS instance faseB", this.data);
 
         //Meteor.call('CrearSegmentos');
-        return 'LoadingMain';
+        return 'pantallaFase3';
       case 'profesor':
        // Meteor.call('CrearSegmentos');
         return 'LoadingMain';

@@ -1,0 +1,197 @@
+
+	
+<template name="pantallaFase3">
+	<div class="container">
+
+		<!-- 
+			 we have 1 row that contains 2 columns
+		     one for the thumbnails and one for the 
+		     main reader view
+		-->
+
+		<div class="row">
+					<h1>{{_ "Fase3Alumno.TXTtitulo"}} </h1>
+					
+					<!-- <button class="RollDices" >Roll the dices </button>   
+					-->
+
+					<!-- <input type="button" class="FinTurno"  onclick="location.href='/fase0';" value="hhfghfg Turno" />
+					-->
+				<!--	 fFUNCIONABA BIEN, PERO QUIERO CAMBIAR SU FUNCIONALIDAD AL LADO DEL PROFESOR
+				 <button class="FinTurno">Terminar turno </button>
+				 -->
+					
+
+
+
+					<!-- <button action="http://google.com" class="FinTurno">Terminar turno </button>
+					-->
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-4 col-xs-4">
+			<p>  </p>
+			</div>
+
+			<div class="col-md-4 col-xs-4">
+			</div>
+
+			<div class="col-md-4 col-xs-4">
+			<p>  </p>
+			</div>
+
+		</div>  <!-- fin de row -->
+
+		<div class="row">
+			<div class="tabla jumbotron">
+				
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4 page-header ">
+					<h2> {{_ "Fase3Alumno.TXTsegmentos"}}</h2>
+					</div>
+
+					<div class="col-md-4 col-xs-4 page-header ">
+					<h2> {{_ "Fase3Alumno.TXTfidelidad"}} </h2>
+					</div>
+
+					<div class="col-md-4 col-xs-4 page-header ">
+					<h2> {{_ "Fase3Alumno.TXTganancias"}}</h2>
+					</div>
+					
+				</div><!-- fin de row -->
+
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> High Income</p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p class="text-primary centrotexto">  {{nameHighIncome}} </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p> {{ingresosHighIncome}}  </p><!-- seria 200 si no considero el redondeo hacia abajo       <p class="bg-success"> -->
+					</div>
+					
+				</div><!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> Innovators</p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p class="text-primary centrotexto">  {{nameInnovators}} </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p> {{ingresosInnovators}}</p>
+					</div>
+					
+				</div><!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> Family First</p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p class="text-primary centrotexto">  {{nameFamilyFirst}} </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p> {{ingresosFamilyFirst}}</p>
+					</div>
+					
+				</div><!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> Status Seekers</p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p class="text-primary centrotexto"> {{nameStatusSeekers}} </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p>{{ingresosStatusSeekers}}</p>
+					</div>
+					
+				</div><!-- fin de row -->
+
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> Adventures</p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p class="text-primary centrotexto">  {{nameAdventurers}} </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p> {{ingresosAdventurers}}</p> <!-- 10 grupos en unawareness-->
+					</div>
+					
+				</div><!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p> Ganancias = {{Ganancias}} </p>
+					</div>
+
+				</div>  <!-- fin de row -->
+
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+					<p> </p>
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					</div>
+
+					<div class="col-md-4 col-xs-4">
+					<p> TOTAL ={{Resultado}} </p>
+					</div>
+
+				</div>  <!-- fin de row -->
+
+
+
+
+			</div><!-- fin de tabla -->
+
+		</div><!-- fin de row -->
+			
+		
+		
+	</div><!-- fin de container -->
+
+	
+</template>
+
+
+
+
+
+
+
+
